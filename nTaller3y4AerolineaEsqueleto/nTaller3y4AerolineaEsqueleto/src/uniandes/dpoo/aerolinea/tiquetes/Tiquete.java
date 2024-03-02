@@ -35,7 +35,7 @@ public class Tiquete {
 		return this.tarifa;
 	}
 	
-	public void marcarComoUSado() {
+	public void marcarComoUsado() {
 		this.usado=true;
 	}
 	

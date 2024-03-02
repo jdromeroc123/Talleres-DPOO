@@ -10,7 +10,7 @@ public class ClienteNatural extends Cliente{
 	}
 	
 	public String getIdentificador() {
-		return "";
+		return this.id;
 	}
 	
 	public String getTipoCliente() {

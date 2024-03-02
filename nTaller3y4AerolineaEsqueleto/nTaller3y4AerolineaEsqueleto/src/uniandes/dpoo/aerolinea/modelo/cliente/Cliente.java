@@ -9,6 +9,7 @@ public abstract class Cliente {
 
 	private List<Tiquete> tiquetesSinUsar;
 	private List<Tiquete> tiquetesUsados;
+	protected String id;
 	
 	public Cliente() {
 	}
@@ -34,6 +35,13 @@ public abstract class Cliente {
 	
 	
 	public void usarTiquetes(Vuelo vuelo) {
+		for (Tiquete tiquete: vuelo.getTiquetes().values())
+		{
+			if (tiquetesSinUsar.contains(tiquete)){
+				tiquetesSinUsar.remove(tiquete);
+				tiquetesUsados.add(tiquete);
+			}
+		}
 	}
 	
 }
