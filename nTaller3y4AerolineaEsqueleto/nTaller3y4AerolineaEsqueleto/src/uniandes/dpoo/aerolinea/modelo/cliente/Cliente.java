@@ -9,7 +9,6 @@ public abstract class Cliente {
 
 	private List<Tiquete> tiquetesSinUsar;
 	private List<Tiquete> tiquetesUsados;
-	protected String id;
 	
 	public Cliente() {
 	}

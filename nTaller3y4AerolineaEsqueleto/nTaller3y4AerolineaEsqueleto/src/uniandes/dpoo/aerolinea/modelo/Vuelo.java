@@ -41,8 +41,7 @@ public class Vuelo {
 	public int venderTiquetes(Cliente cliente, CalculadoraTarifas calculadora, int cantidad) throws VueloSobrevendidoException{
 		if (tiquetes.values().size() <= getAvion().getCapacidad()- cantidad)
 		{
-			CalculadoraTarifasTemporadaAlta calculadoraA = (CalculadoraTarifasTemporadaAlta) calculadora;
-			double tarifaD = calculadoraA.calcularCostoBase(this, cliente)*calculadoraA.calcularPorcentajeDescuento(cliente)*1.28;
+			double tarifaD = calculadora.calcularTarifa(this, cliente);
 			int tarifaI = (int) tarifaD/1;
 			for (int i =0; i<cantidad; i++)
 			{

@@ -13,6 +13,7 @@ import uniandes.dpoo.aerolinea.exceptions.InformacionInconsistenteException;
 import uniandes.dpoo.aerolinea.exceptions.VueloSobrevendidoException;
 import uniandes.dpoo.aerolinea.modelo.cliente.Cliente;
 import uniandes.dpoo.aerolinea.modelo.tarifas.CalculadoraTarifasTemporadaAlta;
+import uniandes.dpoo.aerolinea.modelo.tarifas.CalculadoraTarifasTemporadaBaja;
 import uniandes.dpoo.aerolinea.persistencia.CentralPersistencia;
 import uniandes.dpoo.aerolinea.persistencia.IPersistenciaAerolinea;
 import uniandes.dpoo.aerolinea.persistencia.IPersistenciaTiquetes;
@@ -348,7 +349,15 @@ public class Aerolinea
                 {
                 	Cliente cliente=clientes.get(identificadorCliente);
                 	
-                	return  vueloComprar.venderTiquetes(cliente, new CalculadoraTarifasTemporadaAlta(), cantidad);
+                	boolean primeraTemporadaAlta = 0<Integer.parseInt(fecha.substring(5, 7)) && Integer.parseInt(fecha.substring(5, 7))<6;
+                	boolean segundaTemporadaAlta = 8<Integer.parseInt(fecha.substring(5, 7)) && Integer.parseInt(fecha.substring(5, 7))<12;
+                	
+                	if(primeraTemporadaAlta || segundaTemporadaAlta) {
+                		return  vueloComprar.venderTiquetes(cliente, new CalculadoraTarifasTemporadaAlta(), cantidad);	
+                	}
+                	else {
+                		return  vueloComprar.venderTiquetes(cliente, new CalculadoraTarifasTemporadaBaja(), cantidad);
+                	}
                 }
             	catch(VueloSobrevendidoException e)
                 {
@@ -356,7 +365,7 @@ public class Aerolinea
                 }
                 catch(Exception e)
                 {
-                	throw new Exception("Ocurrió un error", e);
+                	throw new Exception("Ocurrió un error.", e);
                 }
         	}
         }
